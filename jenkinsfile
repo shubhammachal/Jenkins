@@ -1,46 +1,47 @@
 pipeline {
     agent any
 
-    tools{
+    tools {
         maven 'maven3.6.3'
         jdk 'JDK11'
     }
-    
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-        
+
         stage('Build') {
             steps {
-                    sh 'mvn clean install'
-                }
+                sh 'mvn clean install'
             }
         }
-        
+
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'mvn exec:java -Dexec.mainClass="HelloWorld"'
+                sh 'mvn test'
+                // OR if you're running a main class:
+                // sh 'mvn exec:java -Dexec.mainClass="com.example.HelloWorld"'
             }
         }
-        
+
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-            
+                // Add your deploy logic here
             }
         }
     }
-    
+
     post {
         success {
             echo 'Java application built and executed successfully!'
         }
         failure {
-            echo 'build or execution failed!'
+            echo 'Build or execution failed!'
         }
     }
 }
