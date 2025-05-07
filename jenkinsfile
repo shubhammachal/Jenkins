@@ -24,8 +24,7 @@ pipeline {
             steps {
                 echo 'Running tests...'
                 sh 'mvn test'
-                // OR if you're running a main class:
-                sh 'mvn exec:java -Dexec.mainClass="com.example.HelloWorld"'
+
                 echo "tests passed"
             }
         }
