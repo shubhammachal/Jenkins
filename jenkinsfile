@@ -16,7 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('src/main/java') {
-                    sh 'mvn -f src/main/java/pom.xml clean install'
+                    sh 'mvn -f src/main/java clean install'
                 }
             }
         }
