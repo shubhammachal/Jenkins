@@ -11,32 +11,31 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Add your build commands here
-                sh 'ls -la'  // List files in workspace
+                sh maven 'clean compile'
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Add your test commands here
+                sh 'mvn exec:java -Dexec.mainClass="HelloWorld"'
             }
         }
         
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Add your deployment commands here
+            
             }
         }
     }
     
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo 'Java application built and executed successfully!'
         }
         failure {
-            echo 'Pipeline execution failed!'
+            echo 'build or execution failed!'
         }
     }
 }
