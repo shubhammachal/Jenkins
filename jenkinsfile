@@ -16,6 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean install'
+                echo "Build completed successfully!"
             }
         }
 
@@ -24,7 +25,8 @@ pipeline {
                 echo 'Running tests...'
                 sh 'mvn test'
                 // OR if you're running a main class:
-                // sh 'mvn exec:java -Dexec.mainClass="com.example.HelloWorld"'
+                sh 'mvn exec:java -Dexec.mainClass="com.example.HelloWorld"'
+                echo "tests passed"
             }
         }
 
